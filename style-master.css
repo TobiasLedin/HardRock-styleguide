@@ -1,0 +1,684 @@
+
+/*--- Color-theme variables and fonts ---*/
+:root {
+    --darkblue: #2F3C4F;
+    --blue: #506E86;
+    --orange: #FCB040;
+    --rust: #de713b;
+    --rockgrey: #c5c1b8;
+    --white: #f8f2e9f1;
+    --positive: #51fd51;
+    --negative: #fd5151;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif
+}
+
+html {
+    /*--- Border-box takes into account borders/paddings when calculating an elements width/height ---*/
+    box-sizing: border-box;
+    /*--- Scroll behavior ---*/
+    scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+}
+
+/*--- General background color ---*/
+.body {
+    background-color: var(--darkblue);
+}
+
+/*--- Primary layout styling ---*/
+.layout-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*--- Header styling ---*/
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 80%;
+}
+
+/*--- Navigation bar styling ---*/
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: flex-end;
+    background-color: var(--darkblue);
+    /* --- Maintains inline navbar visible in upper screen when scrolling ---*/
+    position: sticky;
+    top: 0;
+}
+
+/* --- Navigation button styling ---*/
+.nav-bar-btn a,
+.nav-bar-btn p {
+    text-decoration: none;
+    text-shadow: 2px 2px 3px var(--darkblue);
+    color: var(--white);
+    background-color: var(--rust);
+    margin-bottom: 0.5vh;
+    margin-left: 0.5rem;
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+    min-width: 80px;
+    font-size: larger;
+    box-shadow: 0 2px 8px black, 0 -1px 8px var(--darkblue), 0px 2px 6px var(--blue);
+}
+
+.nav-bar-btn a:link,
+a:visited,
+a:active {
+    text-decoration: none;
+}
+
+.nav-bar-btn a:hover {
+    background-color: var(--blue);
+}
+
+/* --- Main/center content background ---*/
+section {
+    background-color: var(--orange);
+    box-shadow: 0 2px 8px black, 0 -1px 8px var(--darkblue), 0px 2px 6px var(--darkblue);
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+}
+
+
+/*--- Inline meny ---*/
+/*--- Desktop/wide screen sizes ---*/
+@media screen and (min-width: 1001px) {
+
+    .header {
+        height: 100px;
+        width: 100vw;
+    }
+
+    .logo-img,
+    .compname-img {
+        height: 90px;
+        width: auto;
+        object-fit: contain;
+        margin-top: 5px;
+    }
+
+    .nav-bar {
+        justify-content: center;
+        height: 50px;
+        width: 100vw;
+    }
+
+    /*--- Provides margin to browser edges in x direction when using flexbox layout ---*/
+    .sidebar {
+        width: 10vw;
+    }
+
+    /* --- Main content section with specific max-width to avoid smearing
+        out content when browsing on ultra-wide screens ---*/
+    .content {
+        width: 80vw;
+        max-width: 2000px;
+    }
+
+    /* --- Dropdown menu not visible when inline menu is present ---*/
+    .dropdown-bar {
+        display: none;
+    }
+
+    .topnav-container {
+        display: flex;
+        top: 20px;
+        justify-content: center;
+        align-items: flex-end;
+        z-index: 2;
+    }
+
+    /* --- Scroll snap to sections (only active on narrow screens) ---*/
+    .scroll-snap {
+        scroll-snap-align: none;
+        scroll-margin-block-start: 70px;
+        scroll-margin-top: 50px;
+    }
+
+    /*-- Space between center content sections ---*/
+    section {
+        padding: 2rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
+
+/*--- Drop down menu ---*/
+/*--- Narrow screen sizes ---*/
+@media screen and (min-width:421px) and (max-width: 1000px) {
+
+    /*--- Header disabled ---*/
+    .header {
+        display: none;
+    }
+
+    .logo-img {
+        height: 70px;
+        width: auto;
+        max-width: 20vw;
+        object-fit: contain;
+    }
+
+    /*--- Logo image enabled ---*/
+    .logo-img-toggle {
+        display: block;
+    }
+
+    .compname-img {
+        height: 70px;
+        width: auto;
+        max-width: 50vw;
+        object-fit: contain;
+    }
+
+    .nav-bar {
+        height: 75px;
+        width: 100%;
+    }
+
+    .sb-pad-left {
+        margin-left: 3.5vw;
+    }
+
+    .sb-pad-right {
+        margin-right: 3.5vw;
+    }
+
+    .sidebar {
+        width: 2vw;
+    }
+
+    .content {
+        width: 93vw;
+    }
+
+    /* --- Inline menu replaced by dropdown menu ---*/
+    .topnav-container {
+        display: none;
+    }
+
+    .dropdown-bar {
+        position: fixed;
+        display: flex;
+        width: 100vw;
+        justify-content: space-between;
+        align-items: flex-end;
+        background-color: var(--darkblue);
+        cursor: default;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 60px;
+        right: 3.5vw;
+        z-index: 1;
+    }
+
+    .dropdown-content a,
+    ul {
+        display: block;
+        list-style: none;
+        padding-left: 0.2rem;
+        margin: 0;
+        margin-bottom: 5px;
+    }
+
+    .dropdown-content a:hover {
+        background-color: var(--blue);
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropdown-btn {
+        background-color: var(--blue);
+    }
+
+    .scroll-snap {
+        scroll-snap-align: none;
+        scroll-margin-top: 85px;
+    }
+
+    section {
+        padding: 1.5rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
+
+/*--- Drop down menu ---*/
+/*--- Very narrow screen sizes ---*/
+@media screen and (max-width: 420px) {
+
+    /*--- Header disabled ---*/
+    .header {
+        display: none;
+    }
+
+    /*--- Logo image disabled ---*/
+    .logo-img-toggle {
+        display: none;
+    }
+
+    .compname-img {
+        height: 70px;
+        width: auto;
+        max-width: 55vw;
+        object-fit: contain;
+    }
+
+    .nav-bar {
+        height: 75px;
+        width: 100vw;
+    }
+
+    /*--- Reduced font-size ---*/
+    .nav-bar-btn a,
+    .nav-bar-btn p {
+        min-width: 60px;
+        font-size: medium;
+    }
+
+    .sb-pad-right {
+        margin-right: 1.5vw;
+    }
+
+    .sidebar {
+        width: 1vw;
+    }
+
+    .content {
+        width: 98vw;
+    }
+
+    /* --- Inline menu replaced by dropdown menu ---*/
+    .topnav-container {
+        display: none;
+    }
+
+    .dropdown-bar {
+        position: fixed;
+        display: flex;
+        width: 100vw;
+        justify-content: space-between;
+        align-items: flex-end;
+        background-color: var(--darkblue);
+        cursor: default;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 53px;
+        right: 1.3vw;
+        z-index: 1;
+    }
+
+    .dropdown-content a,
+    ul {
+        display: block;
+        list-style: none;
+        padding-left: 0.2rem;
+        margin: 0;
+        margin-bottom: 5px;
+    }
+
+    .dropdown-content a:hover {
+        background-color: var(--blue);
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+
+    }
+
+    .dropdown:hover .dropdown-btn {
+        background-color: var(--blue);
+    }
+
+    .scroll-snap {
+        scroll-snap-align: none;
+        scroll-margin-top: 85px;
+    }
+
+    section {
+        padding: 1rem;
+        margin-bottom: 0.8rem;
+    }
+}
+
+
+/*--- Header styling start ---*/
+h1 {
+    color: var(--rockgrey);
+    margin: 0;
+    margin-bottom: 1.5rem;
+    font-size: 2.0em;
+    font-weight: 700;
+    text-shadow: 0px 0px 10px var(--darkblue), 0px -2px 2px var(--darkblue), 2px 0px 2px var(--darkblue), -2px 0px 2px var(--darkblue);
+}
+
+h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+/*--- Header styling start ---*/
+
+/*--- Button styling start ---*/
+.btn-general {
+    display: block;
+    text-decoration: none;
+    margin: 0.4rem;
+    padding: 0.25rem;
+    border: 1px solid black;
+    border-radius: 2px;
+    font-size: 1em;
+    transition: 0.3s;
+}
+
+.btn {
+    text-shadow: 2px 2px 3px var(--darkblue);
+    background-color: var(--blue);
+    color: var(--white)
+}
+
+.btn:hover {
+    background-color: var(--darkblue);
+
+}
+
+.btn-func {
+    color: black;
+    background-color: var(--rockgrey);
+}
+
+.btn-func:hover {
+    background-color: #696868;
+}
+
+.btn-positive {
+    color: black;
+    background-color: var(--positive);
+}
+
+.btn-positive:hover {
+    background-color: #04d604;
+}
+
+.btn-negative {
+    color: black;
+    background-color: var(--negative);
+}
+
+.btn-negative:hover {
+    background-color: #d60404;
+}
+
+/*--- Button styling end ---*/
+
+/*--- Table styling start ---*/
+.table-body {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    caption-side: bottom;
+}
+
+th,
+td,
+tr {
+    border: 1px solid black;
+    border-spacing: 0;
+    padding: 0.5em;
+}
+
+th {
+    text-shadow: 2px 2px 3px var(--darkblue);
+    background-color: var(--blue);
+    color: var(--white)
+}
+
+.table-long td:nth-child(even) {
+    background-color: whitesmoke;
+}
+
+.table-long td:nth-child(odd) {
+    background-color: lightgrey;
+}
+
+.table-wide tr:nth-child(even) {
+    background-color: whitesmoke;
+
+}
+
+.table-wide tr:nth-child(odd) {
+    background-color: lightgrey;
+
+}
+
+/*--- Table styling end ---*/
+
+/*--- Messages styling start ---*/
+.msg {
+
+    border: 1px solid black;
+    margin-bottom: 0.8em;
+    padding: 0.5em;
+    box-shadow: 0px 2px 10px var(--darkblue), 2px 0px 10px var(--darkblue);
+}
+
+.msg-success {
+    background-color: var(--positive);
+}
+
+.msg-info {
+    background-color: var(--rockgrey);
+}
+
+.msg-warning {
+    background-color: var(--rust);
+}
+
+.msg-error {
+    background-color: var(--negative);
+}
+
+
+.x-btn {
+    float: right;
+    border: none;
+    background: none;
+    font-weight: bold;
+    font-size: 1.5em;
+    transition: 0.3s;
+}
+
+.x-btn:hover {
+    color: red;
+    text-shadow: 0px 0px 10px var(--darkblue);
+}
+
+/*--- Messages styling end ---*/
+
+/*--- Panels styling start ---*/
+.pnl {
+    border: 1px solid black;
+    margin-bottom: 0.8em;
+    box-shadow: 0px 2px 10px var(--darkblue), 2px 0px 10px var(--darkblue);
+
+}
+
+.pnl-heading {
+    font-weight: bolder;
+    padding: 0.5em;
+}
+
+.pnl-body {
+    background-color: var(--white);
+    padding: 0.5em;
+}
+
+.pnl-positive {
+    background-color: var(--positive);
+}
+
+.pnl-neutral {
+    background-color: var(--rockgrey);
+}
+
+.pnl-negative {
+    background-color: var(--negative);
+}
+
+/*--- Panels styling end ---*/
+
+/*--- Forms styling start ---*/
+.forms {
+    background-color: whitesmoke;
+    border: 1px solid black;
+    box-shadow: 0px 2px 10px var(--darkblue), 2px 0px 10px var(--darkblue);
+    padding: 1em;
+    max-width: 500px;
+}
+
+.forms>h2 {
+    margin-block-start: 0em;
+    margin-block-end: 0.3em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.forms,
+.radio,
+.checkbox {
+    margin: 0.3em;
+}
+
+.forms,
+.radio,
+.checkbox>label {
+    font-weight: 500;
+}
+
+.form-buttons {
+    display: inline;
+}
+
+input[type=text],
+[type=password],
+[type=number] {
+    width: 100%;
+    cursor: default;
+}
+
+select {
+    width: 100%;
+}
+
+/*--- Forms styling end ---*/
+
+/*--- Loading animation start ---*/
+@keyframes loading {
+    0% {
+        transform: scaleY(0);
+        background-color: var(--rockgrey);
+    }
+
+    100% {
+        transform: scaleY(1);
+        background-color: var(--darkblue);
+        box-shadow: 2px 2px 3px var(--rust);
+    }
+}
+
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-box {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    width: 150px;
+    height: 100px;
+    z-index: 1;
+}
+
+.loading-box>div {
+    width: 15px;
+    height: 80px;
+    background-color: #2F3C4F;
+    animation-name: loading;
+    animation-duration: 1.4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.loading-bar2 {
+    animation-delay: 0.3s;
+}
+
+.loading-bar3 {
+    animation-delay: 0.6s;
+}
+
+.loading-bar4 {
+    animation-delay: 0.9s;
+}
+
+.loading-bar5 {
+    animation-delay: 1.2s;
+}
+
+/*--- Loading animation end ---*/
+
+/*--- Footer styling start ---*/
+.footer {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+
+.footer-txt a {
+    text-decoration: none;
+    color: whitesmoke
+}
+
+/*--- Footer styling end ---*/
